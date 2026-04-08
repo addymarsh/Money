@@ -2,13 +2,6 @@ body {
     background-color: rgba(88, 196, 76, 1);
 }
 
-.all {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    flex-direction: column;
-}
 
 .head {
     color: rgba(213, 240, 210, 1);
@@ -24,21 +17,24 @@ body {
     padding-top: 3vh;
 }
 
-.buttons {
-    display: flex;
-    flex-direction: column;
+.when {
+
+    color: rgba(213, 240, 210, 1);
+    font-size: 60px;
+    font-family: "Carp Trial", "Inria Sans", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    line-height: 0.98;
     align-items: center;
     justify-content: center;
     position: relative;
+    text-align: center;
     padding-top: 3vh;
-    column-gap: 5vh;
-    row-gap: 1vh;
-   
+    padding-bottom: 3vh;
+
 }
 
-.house, .car, .vacation, .edu, .event, .shop, .other {
-    display: flex;
-   
+.needed, .whent {
     font-family: "Carp Trial", "Inria Sans", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -46,7 +42,7 @@ body {
     color: rgba(88, 196, 76, 1);
     background-color: rgba(213, 240, 210, 1);
     width: 90vw;
-    height: 10vh;
+    height: 5vh;
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -54,14 +50,9 @@ body {
     border-radius: 40px 40px 40px 40px;
     text-decoration: none;
 
+
 }
 
-.buttons a:link,
-.buttons a:visited,
-.buttons a:hover,
-.buttons a:active {
+.textarea {
     color: rgba(88, 196, 76, 1);
-    text-decoration: none;
 }
-
-
