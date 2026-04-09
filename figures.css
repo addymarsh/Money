@@ -14,7 +14,8 @@ body {
     justify-content: center;
     position: relative;
     text-align: center;
-    padding-top: 3vh;
+    padding-top: 20vh;
+    padding-bottom: 3vh;
 }
 
 .when {
@@ -49,10 +50,23 @@ body {
     position: relative;
     border-radius: 40px 40px 40px 40px;
     text-decoration: none;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    border: none;
+    position: relative;
+    left: 3vw;
 
 
 }
 
 .textarea {
     color: rgba(88, 196, 76, 1);
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    border: none;
+}
+
+::placeholder {
+    color: rgba(88, 196, 76, 1);
+    opacity: 0.8;
 }

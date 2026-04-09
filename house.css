@@ -1,0 +1,83 @@
+body {
+    background-color: rgba(27, 111, 255, 1);
+}
+
+.top {
+font-family: "Carp Trial", "Inria Sans", sans-serif;
+color: rgba(255, 255, 255, 0.75);
+font-size: 20px;
+padding-left: 10vw;
+font-size: 40px;
+padding-top: 3vh;
+
+
+}
+
+.time {
+padding-bottom: .5vh;
+}
+
+.bar {
+    background-color: rgba(255, 255, 255, 0.75);
+    height: 2vh;
+    width: 90vw;
+    position: relative;
+    border-radius: 10px 10px 10px 10px;
+    right: 7vw;
+  
+
+
+}
+
+.money {
+    left: 85vw;
+    padding-top: .5vh;
+    position: relative;
+    left: 50vw;
+
+}
+
+.bottom {
+    font-family: "Carp Trial", "Inria Sans", sans-serif;
+    color: rgba(255, 255, 255, 0.75);
+    position: relative;
+    top: 60vh;
+    font-size: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+
+}
+
+.goal {
+    padding-bottom: 1vh;
+    
+}
+
+.add {
+    font-weight: 400;
+    font-style: normal;
+    font-size: 50px;
+    color: rgba(27, 111, 255, 1);
+    background-color: rgba(255, 255, 255, 0.75);
+    width: 90vw;
+    height: 10vh;
+    line-height: 10vh;
+    text-align: center;
+    text-justify: center;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    position: relative;
+    border-radius: 40px 40px 40px 40px;
+}
+
+::placeholder {
+    color: rgba(27, 111, 255, 1);
+    font-size: 50px;
+    font-family: "Carp Trial", "Inria Sans", sans-serif;
+
+}
+
