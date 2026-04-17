@@ -3,7 +3,7 @@ body {
 }
 
 .top {
-font-family: "Carp Trial", "Inria Sans", sans-serif;
+font-family: "Carp Wide Bold", sans-serif;
 color: rgba(255, 255, 255, 0.75);
 font-size: 20px;
 padding-left: 10vw;
@@ -38,7 +38,7 @@ padding-bottom: .5vh;
 }
 
 .bottom {
-    font-family: "Carp Trial", "Inria Sans", sans-serif;
+    font-family: "Carp Wide Bold", sans-serif;
     color: rgba(255, 255, 255, 0.75);
     position: relative;
     top: 60vh;
@@ -77,7 +77,7 @@ padding-bottom: .5vh;
 ::placeholder {
     color: rgba(28, 97, 9, 1);
     font-size: 50px;
-    font-family: "Carp Trial", "Inria Sans", sans-serif;
+    font-family: "Carp Wide Bold", sans-serif;
 
 }
 

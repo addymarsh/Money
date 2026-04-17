@@ -1,0 +1,88 @@
+body {
+    background-color: rgba(88, 196, 76, 1);
+    font-family: "Carp Wide Bold", sans-serif;
+}
+
+.a {
+    text-decoration: none;
+
+}
+
+.all {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 85vh;
+    position: relative;
+    width: 100%;
+    row-gap: 2vh;
+}
+
+.signup, .login {
+    color:rgba(213, 240, 210, 1);
+    font-size: 50px;
+    position: relative;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1vh;
+
+}
+
+.login-d, .signup-d {
+    background-color: rgba(255, 255, 255, 0.75);
+    width: 90vw;
+    height: 24vh;
+    border-radius: 40px 40px 40px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding-bottom: 1vh;
+}
+
+.user, .pass {
+    color: rgba(88, 196, 76, 1);
+    font-size: 30px;
+    padding-top: 1vh;
+    align-items: left;
+    margin-right: 25vw;;
+
+}
+
+
+.pass-b {
+    padding-bottom: 2vh;
+}
+
+
+
+textarea {
+  background-color: rgba(88, 196, 76, 1);
+  border: none;
+  border-radius: 10px 10px 10px 10px;
+  width: 70vw;
+  height: 3vh;
+
+}
+
+.cont {
+    z-index: 2;
+    color: rgba(213, 240, 210, 1);
+    background-color: rgba(88, 196, 76, 1);
+    height: 3vh;
+    width: 30vw;
+    font-size: 20px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px 10px 10px 10px;
+    position: relative;
+    padding-top: 1vh;
+    
+
+}
+    
+

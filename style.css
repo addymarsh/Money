@@ -13,7 +13,7 @@ body {
 .head {
     color: rgba(213, 240, 210, 1);
     font-size: 60px;
-    font-family: "Carp Trial", "Inria Sans", sans-serif;
+    font-family: "Carp Wide Bold", sans-serif;
     font-weight: 700;
     font-style: normal;
     line-height: 0.98;
@@ -39,7 +39,7 @@ body {
 .house, .car, .vacation, .edu, .event, .shop, .other {
     display: flex;
    
-    font-family: "Carp Trial", "Inria Sans", sans-serif;
+    font-family: "Carp Wide Bold", sans-serif;
     font-weight: 400;
     font-style: normal;
     font-size: 50px;
