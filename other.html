@@ -14,11 +14,11 @@
     <div class="help"><a href=advice.html>Need help?</a></div>
 
     <div class="top">
-        <div class=time>
-           $0 left to save!
+        <div class="time">
+           Loading…
         </div>
-        <div class="bar"></div>
-        <div class="money">$0/$0</div>
+        <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="bar-fill"></div></div>
+        <div class="money">$0 / $0</div>
     </div>
 
     <div class="picture">
@@ -29,9 +29,13 @@
         <div class="goal">
             Save $0 this month!
         </div>
-        <textarea placeholder="Enter Amount" class="add"></textarea>
+        <form id="savings-form" novalidate>
+            <textarea placeholder="Enter amount saved" class="add" id="add-amount" inputmode="decimal"></textarea>
+            <p class="savings-error" id="savings-error" hidden></p>
+            <button type="submit" class="add-btn">Add to savings</button>
+        </form>
     </div>
 
-
-
+    <script src="js/money-app.js"></script>
+    <script src="js/page-other.js"></script>
     </body>

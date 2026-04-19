@@ -33,14 +33,15 @@ body {
 .login-d, .signup-d {
     background-color: rgba(255, 255, 255, 0.75);
     width: 90vw;
-    height: 24vh;
+    min-height: 24vh;
     border-radius: 40px 40px 40px 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
-    padding-bottom: 1vh;
+    padding: 2vh 0 1vh;
+    box-sizing: border-box;
 }
 
 .user, .pass {
@@ -59,13 +60,26 @@ body {
 
 
 
-textarea {
+textarea,
+.login-d input {
   background-color: rgba(88, 196, 76, 1);
   border: none;
   border-radius: 10px 10px 10px 10px;
   width: 70vw;
   height: 3vh;
+  color: rgba(213, 240, 210, 1);
+  font-family: inherit;
+  font-size: 16px;
+  padding: 0 8px;
+  box-sizing: border-box;
+}
 
+.form-error {
+  color: rgba(139, 30, 30, 1);
+  font-size: 14px;
+  margin: 0;
+  text-align: center;
+  max-width: 80vw;
 }
 
 .cont {
@@ -81,6 +95,9 @@ textarea {
     border-radius: 10px 10px 10px 10px;
     position: relative;
     padding-top: 1vh;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
     
 
 }

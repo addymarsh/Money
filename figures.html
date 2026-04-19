@@ -19,18 +19,22 @@
             How much do you need?
         </div>
 
-        <textarea class="needed" placeholder="Enter Amount"></textarea>
+        <form id="figures-form" novalidate>
+            <input class="needed" type="text" id="needed" name="needed" inputmode="decimal" placeholder="Enter amount (e.g. 500)" required>
 
-        <div class="when">
-            When do you need it?
-        </div>
+            <div class="when">
+                When do you need it?
+            </div>
 
-        <textarea class="whent" placeholder="Enter Date"></textarea>
+            <input class="whent" type="date" id="whent" name="whent" required>
 
-        <div class="cont"><a href=other.html>Continue</a></div>
+            <p class="figures-error" id="figures-error" hidden></p>
 
+            <button type="submit" class="cont">Continue</button>
+        </form>
 
-        
+    <script src="js/money-app.js"></script>
+    <script src="js/page-figures.js"></script>
     </body>
 
 </html>

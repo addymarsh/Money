@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang=en>
+    
+    <head>
+        <meta charset="UTF-8">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Congratulations — Money</title>
+
+
+
+        <link rel="stylesheet" href="fonts.css">
+        <link href="congrats.css" rel="stylesheet">
+    </head>
+
+    <body>
+
+        <div class="congrats-wrap">
+            <h1 class="congrats-title">You did it!</h1>
+            <p class="congrats-sub">Share a quick tip so everyone on the advice board can learn from you.</p>
+            <form id="congrats-form" novalidate>
+                <label class="sr-only" for="advice-post">Your tip</label>
+                <textarea id="advice-post" class="congrats-input" placeholder="What helped you save? (shows on Tips For Saving)" rows="4" required></textarea>
+                <p class="congrats-error" id="congrats-error" hidden></p>
+                <button type="submit" class="congrats-submit">Post and see the board</button>
+            </form>
+        </div>
+
+    <script src="js/money-app.js"></script>
+    <script src="js/page-congratulations.js"></script>
+    </body>
+    </html>

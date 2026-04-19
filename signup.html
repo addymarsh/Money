@@ -13,16 +13,18 @@
 
     <div class="all">
         <div class="signup">Sign up</div>
-        <div class="login-d">
+        <form class="login-d" id="signup-form" novalidate>
             <div class="user">Username</div>
-            <div class="user-b"><textarea></textarea></div>
+            <div class="user-b"><input type="text" id="username" name="username" autocomplete="username" required></div>
             <div class="pass">Password</div>
-            <div class="pass-b"><textarea></textarea></div>
-            <div class="cont"><a href=index.html>Continue</a></div>
-
-        </div>
-        <div class="login-b"><a href=index.html>Or log in</a></div>
+            <div class="pass-b"><input type="password" id="password" name="password" autocomplete="new-password" required></div>
+            <p class="form-error" id="signup-error" hidden></p>
+            <button type="submit" class="cont">Continue</button>
+        </form>
+        <div class="login-b"><a href="index.html">Or log in</a></div>
     </div>
 
+    <script src="js/money-app.js"></script>
+    <script src="js/page-signup.js"></script>
     </body>
     </html>

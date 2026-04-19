@@ -18,15 +18,21 @@ padding-bottom: .5vh;
 }
 
 .bar {
-    background-color: rgba(255, 255, 255, 0.75);
+    background-color: rgba(255, 255, 255, 0.35);
     height: 2vh;
     width: 90vw;
     position: relative;
     border-radius: 10px 10px 10px 10px;
     right: 7vw;
-  
+    overflow: hidden;
+}
 
-
+.bar-fill {
+    background-color: rgba(213, 240, 210, 1);
+    height: 100%;
+    width: 0%;
+    border-radius: 10px 10px 10px 10px;
+    transition: width 0.35s ease;
 }
 
 .money {
@@ -47,8 +53,33 @@ padding-bottom: .5vh;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    display: flex;
 
+}
+
+#savings-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 1vh;
+}
+
+.savings-error {
+    color: rgba(139, 30, 30, 1);
+    font-size: 20px;
+    margin: 0;
+    text-align: center;
+}
+
+.add-btn {
+    font-family: "Carp Wide Bold", sans-serif;
+    font-size: 24px;
+    color: rgba(213, 240, 210, 1);
+    background-color: rgba(28, 97, 9, 0.85);
+    border: none;
+    border-radius: 40px;
+    padding: 1.5vh 6vw;
+    cursor: pointer;
 }
 
 .goal {
@@ -79,5 +110,46 @@ padding-bottom: .5vh;
     font-size: 50px;
     font-family: "Carp Wide Bold", sans-serif;
 
+}
+
+.confetti-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10000;
+    overflow: hidden;
+}
+
+.confetti-bill {
+    position: absolute;
+    top: -56px;
+    left: var(--left, 50%);
+    width: var(--size, 40px);
+    height: auto;
+    display: block;
+    animation-name: confetti-bill-fall;
+    animation-duration: var(--dur, 2.5s);
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-delay: var(--delay, 0s);
+    will-change: transform;
+}
+
+@keyframes confetti-bill-fall {
+    0% {
+        transform: translateX(-50%) translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(calc(-50% + var(--drift, 0px))) translateY(110vh) rotate(var(--twist, 720deg));
+        opacity: 0.95;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .confetti-bill {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
 }
 
