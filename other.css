@@ -1,5 +1,5 @@
 body {
-    background-color: rgba(28, 97, 9, 1);
+    background-color: rgba(88, 196, 76, 1);
 }
 
 .top {
@@ -75,7 +75,7 @@ padding-bottom: .5vh;
 }
 
 ::placeholder {
-    color: rgba(28, 97, 9, 1);
+    color: rgba(88, 196, 76, 1);
     font-size: 50px;
     font-family: "Carp Wide Bold", sans-serif;
 

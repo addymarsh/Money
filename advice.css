@@ -1,0 +1,68 @@
+body {
+    background-color: rgba(88, 196, 76, 1);
+}
+
+.all {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    padding-top: 1vh;
+
+}
+
+.back {
+    background-color: rgba(213, 240, 210, 1);
+    width: 20vw;
+    height: 3vh;
+    border-radius: 40px 40px 40px 40px;
+    color: rgba(88, 196, 76, 1);
+    text-align: center;
+    padding-top: 1vh;
+    position: relative;
+    right: 33vw;
+}
+
+
+.test {
+    background-color: rgba(213, 240, 210, 1);
+    width: 90vw;
+    height: 12vh;
+    border-radius: 40px 40px 40px 40px;
+}
+
+.user {
+    color: rgba(88, 196, 76, 1);
+    font-size: 30px;
+    padding-top: 1vh;
+    padding-left: 4vw;
+
+}
+
+.text {
+    color: rgba(88, 196, 76, 1);
+    font-size: 20px;
+    padding-left: 4vw;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+
+}
+
+.title {
+    color: rgba(213, 240, 210, 1);
+    font-size: 40px;
+    font-family: "Carp Wide Bold", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    text-align: center;
+    position: relative;
+    width: 100%;
+    line-height: .5;
+}
+
+a {
+    text-decoration: none;
+    color: rgba(88, 196, 76, 1);
+}
