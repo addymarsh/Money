@@ -1,0 +1,27 @@
+.page-splash {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(88, 196, 76, 1);
+    opacity: 1;
+    transition: opacity var(--splash-fade-ms, 0.45s) ease;
+    pointer-events: auto;
+}
+
+.page-splash--out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.page-splash__logo {
+    width: min(55vw, 280px);
+    height: auto;
+    display: block;
+}
+
+.page-splash--index .page-splash__logo {
+    width: min(88vw, 520px);
+}

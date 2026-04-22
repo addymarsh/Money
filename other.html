@@ -5,11 +5,16 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="fonts.css">
         <link rel="stylesheet" href="other.css">
+        <link rel="stylesheet" href="splash.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Money</title>
 
     </head>
  <body>
+
+    <div class="page-splash" id="page-splash" aria-hidden="true">
+        <img src="gg.svg" alt="" class="page-splash__logo" width="360" height="360" decoding="async">
+    </div>
 
     <div class="help"><a href=advice.html>Need help?</a></div>
 
@@ -22,7 +27,7 @@
     </div>
 
     <div class="picture">
-
+        <img id="goal-progress-image" src="one.svg" alt="" class="picture__art" width="360" height="360" decoding="async">
     </div>
 
     <div class="bottom">
@@ -30,7 +35,7 @@
             Save $0 this month!
         </div>
         <form id="savings-form" novalidate>
-            <textarea placeholder="Enter amount saved" class="add" id="add-amount" inputmode="decimal"></textarea>
+            <textarea placeholder="Enter amount" class="add" id="add-amount" inputmode="decimal"></textarea>
             <p class="savings-error" id="savings-error" hidden></p>
             <button type="submit" class="add-btn">Add to savings</button>
         </form>
@@ -38,4 +43,5 @@
 
     <script src="js/money-app.js"></script>
     <script src="js/page-other.js"></script>
+    <script src="js/splash.js"></script>
     </body>

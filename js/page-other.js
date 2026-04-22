@@ -1,5 +1,67 @@
 (function () {
   var BILL_SRC = "dollar%20bill.svg";
+  var goalCompleteRedirectScheduled = false;
+  var PROGRESS_ART_QS = "?v=5";
+
+  function toMoneyNumber(raw) {
+    if (raw == null || raw === "") return NaN;
+    if (typeof raw === "number" && isFinite(raw)) return raw;
+    return window.MoneyApp.parseMoney(raw);
+  }
+
+  var P1 = 100 / 6;
+  var P2 = 200 / 6;
+  var P3 = 50;
+  var P4 = 400 / 6;
+  var P5 = 500 / 6;
+
+  /**
+   * Same percentage as the progress bar: (saved/target)*100.
+   * Thresholds: ≤16⅔%, ≤33⅓%, ≤50%, ≤66⅔%, ≤83⅓%, then six until 100%.
+   */
+  function progressArtFromPct(pct) {
+    var p = Number(pct);
+    if (!isFinite(p)) p = 0;
+    if (p < 0) p = 0;
+    if (p > 100) p = 100;
+    if (p >= 100) return "congrats.svg";
+    if (p <= P1) return "one.svg";
+    if (p <= P2) return "two.svg";
+    if (p <= P3) return "three.svg";
+    if (p <= P4) return "four.svg";
+    if (p <= P5) return "five.svg";
+    return "six.svg";
+  }
+
+  function progressArtUrl(filename) {
+    var base = filename.indexOf("?") >= 0 ? filename : filename + PROGRESS_ART_QS;
+    return base;
+  }
+
+  function updateProgressArt(saved, target) {
+    var img =
+      document.getElementById("goal-progress-image") ||
+      document.querySelector(".picture img.picture__art");
+    if (!img) return;
+    var t = Number(target);
+    var s = Number(saved);
+    if (!isFinite(s) || s < 0) s = 0;
+    if (Math.abs(s) < 1e-6) s = 0;
+    if (!isFinite(t) || t <= 0) {
+      img.src = progressArtUrl("one.svg");
+      return;
+    }
+    if (s >= t) {
+      img.src = progressArtUrl("congrats.svg");
+      return;
+    }
+    if (!(s > 0)) {
+      img.src = progressArtUrl("one.svg");
+      return;
+    }
+    var pct = Math.min(100, Math.max(0, (s / t) * 100));
+    img.src = progressArtUrl(progressArtFromPct(pct));
+  }
 
   function playBillConfetti() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -60,15 +122,25 @@
       window.location.href = "figures.html";
       return;
     }
-    var target = user.targetAmount;
-    var saved = user.savedAmount || 0;
+    window.MoneyApp.applyExpectSavedZeroAfterGoalSet(u);
+    window.MoneyApp.repairSavedIfExceedsTarget(u);
+    user = window.MoneyApp.getUser(u);
+    var target = toMoneyNumber(user.targetAmount);
+    var saved = toMoneyNumber(user.savedAmount);
+    if (!isFinite(saved) || saved < 0) saved = 0;
+    saved = Math.round(saved * 100) / 100;
+    if (Math.abs(saved) < 1e-6) saved = 0;
+    if (!isFinite(target) || target <= 0) {
+      window.location.href = "figures.html";
+      return;
+    }
     var end = window.MoneyApp.parseStoredGoalDate(user.targetDate) || new Date(user.targetDate);
     var now = new Date();
     now.setHours(0, 0, 0, 0);
     end.setHours(0, 0, 0, 0);
     var days = window.MoneyApp.daysBetween(now, end);
     var remaining = Math.max(0, target - saved);
-    var pct = target > 0 ? Math.min(100, (saved / target) * 100) : 0;
+    var pct = Math.min(100, Math.max(0, (saved / target) * 100));
 
     if (timeEl) {
       timeEl.textContent =
@@ -111,8 +183,19 @@
       barEl.setAttribute("aria-valuetext", window.MoneyApp.formatMoney(saved) + " of " + window.MoneyApp.formatMoney(target));
     }
 
-    if (saved >= target) {
-      window.location.href = "congratulations.html";
+    updateProgressArt(saved, target);
+    window.requestAnimationFrame(function () {
+      updateProgressArt(saved, target);
+    });
+
+    if (saved >= target && !goalCompleteRedirectScheduled) {
+      goalCompleteRedirectScheduled = true;
+      var waitComplete = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? 0
+        : 2600;
+      window.setTimeout(function () {
+        window.location.href = "congratulations.html";
+      }, waitComplete);
     }
   }
 
@@ -132,6 +215,10 @@
       if (addInput) addInput.value = "";
       playBillConfetti();
       if (r.done) {
+        var doneUser = window.MoneyApp.getUser(u);
+        var dt = doneUser ? Number(doneUser.targetAmount) : 0;
+        var ds = doneUser ? Number(doneUser.savedAmount) : 0;
+        updateProgressArt(ds, dt);
         var waitMs = window.matchMedia("(prefers-reduced-motion: reduce)").matches
           ? 0
           : 2600;
@@ -143,6 +230,14 @@
       }
     });
   }
+
+  window.addEventListener("moneyAppSplashDismissed", function () {
+    refresh();
+  });
+
+  window.addEventListener("pageshow", function (ev) {
+    if (ev.persisted) refresh();
+  });
 
   refresh();
 })();

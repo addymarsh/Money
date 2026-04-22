@@ -3,9 +3,9 @@ body {
     font-family: "Carp Wide Bold", sans-serif;
 }
 
-.a {
+a, a:link, a:visited, a:hover, a:active {
     text-decoration: none;
-
+    color:rgba(213, 240, 210, 1);
 }
 
 .all {
@@ -94,7 +94,6 @@ textarea,
     align-items: center;
     border-radius: 10px 10px 10px 10px;
     position: relative;
-    padding-top: 1vh;
     border: none;
     cursor: pointer;
     font-family: inherit;
@@ -102,4 +101,10 @@ textarea,
 
 }
     
+.help {
+    position: relative;
+    text-decoration: none;
+}
+
+
 

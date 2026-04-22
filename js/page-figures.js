@@ -30,6 +30,7 @@
       }
       return;
     }
+    window.MoneyApp.markExpectSavedZeroAfterGoalSet(u);
     window.location.href = "other.html";
   });
 })();

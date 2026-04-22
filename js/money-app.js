@@ -4,6 +4,109 @@
   var USERS_KEY = "moneyAppUsers";
   var POSTS_KEY = "moneyAppAdvicePosts";
   var SESSION_KEY = "moneyAppSession";
+  var EXPECT_ZERO_PREFIX = "moneyApp:expectZeroSaved:";
+  var MIRROR_PREFIX = "MoneyAppM1|";
+
+  function isFileProtocol() {
+    return typeof location !== "undefined" && location.protocol === "file:";
+  }
+
+  function normalizeUsername(username) {
+    return username == null ? "" : String(username).trim();
+  }
+
+  function loadMirrorState() {
+    try {
+      var n = window.name;
+      if (!n || n.indexOf(MIRROR_PREFIX) !== 0) return null;
+      return JSON.parse(n.substring(MIRROR_PREFIX.length));
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function saveMirrorState(m) {
+    try {
+      window.name = MIRROR_PREFIX + JSON.stringify(m);
+    } catch (e) {}
+  }
+
+  function mirrorPatchKeyValue(key, value) {
+    if (!isFileProtocol()) return;
+    var m = loadMirrorState() || {};
+    if (value === null || value === undefined) delete m[key];
+    else m[key] = value;
+    saveMirrorState(m);
+  }
+
+  /**
+   * file:/// uses a separate localStorage per HTML file. Keep one copy in
+   * window.name (per tab) and merge both ways on each load so index, figures,
+   * and other share the same users + session.
+   */
+  function mergeMirrorBidirectional() {
+    if (!isFileProtocol()) return;
+    var m = loadMirrorState() || {};
+    function persistMirror() {
+      saveMirrorState(m);
+    }
+
+    function mergeJsonKey(key) {
+      var loc = localStorage.getItem(key);
+      var mir = m[key];
+      if (loc == null && mir != null) {
+        localStorage.setItem(key, JSON.stringify(mir));
+      }
+      loc = localStorage.getItem(key);
+      if (loc != null) {
+        try {
+          m[key] = JSON.parse(loc);
+        } catch (e) {}
+      }
+    }
+
+    function mergeStringKey(key) {
+      var loc = localStorage.getItem(key);
+      var mir = m[key];
+      if (loc == null && mir != null) {
+        localStorage.setItem(key, String(mir));
+      }
+      loc = localStorage.getItem(key);
+      if (loc != null) {
+        m[key] = loc;
+      }
+    }
+
+    mergeJsonKey(USERS_KEY);
+    mergeJsonKey(POSTS_KEY);
+    mergeStringKey(SESSION_KEY);
+
+    Object.keys(m).forEach(function (key) {
+      if (key.indexOf(EXPECT_ZERO_PREFIX) !== 0) return;
+      var loc = localStorage.getItem(key);
+      var mir = m[key];
+      if (loc == null && mir != null) localStorage.setItem(key, String(mir));
+      loc = localStorage.getItem(key);
+      if (loc != null) m[key] = loc;
+    });
+    Object.keys(localStorage).forEach(function (key) {
+      if (key.indexOf(EXPECT_ZERO_PREFIX) !== 0) return;
+      if (m[key] == null && localStorage.getItem(key) != null) {
+        m[key] = localStorage.getItem(key);
+      }
+    });
+
+    persistMirror();
+  }
+
+  mergeMirrorBidirectional();
+
+  if (isFileProtocol() && !window.__moneyAppFileProtoNoted) {
+    window.__moneyAppFileProtoNoted = true;
+    console.info(
+      "Money app (file://): savings data is synced across pages in this tab via window.name. Use a local HTTP server if you open multiple tabs or still see wrong balances."
+    );
+  }
 
   function readJson(key, fallback) {
     try {
@@ -16,15 +119,19 @@
 
   function writeJson(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
+    mirrorPatchKeyValue(key, value);
   }
 
   function getSession() {
-    return localStorage.getItem(SESSION_KEY);
+    var raw = localStorage.getItem(SESSION_KEY);
+    return raw ? normalizeUsername(raw) : null;
   }
 
   function setSession(username) {
-    if (username) localStorage.setItem(SESSION_KEY, username);
+    var u = normalizeUsername(username);
+    if (u) localStorage.setItem(SESSION_KEY, u);
     else localStorage.removeItem(SESSION_KEY);
+    mirrorPatchKeyValue(SESSION_KEY, u || null);
   }
 
   function getUsers() {
@@ -32,16 +139,21 @@
   }
 
   function saveUserRecord(username, record) {
+    var key = normalizeUsername(username);
+    if (!key) return;
     var users = getUsers();
-    users[username] = record;
+    users[key] = JSON.parse(JSON.stringify(record));
     writeJson(USERS_KEY, users);
   }
 
   function getUser(username) {
-    return getUsers()[username] || null;
+    var key = normalizeUsername(username);
+    if (!key) return null;
+    return getUsers()[key] || null;
   }
 
   function signup(username, password) {
+    username = normalizeUsername(username);
     if (!username || !password) return { ok: false, message: "Enter username and password." };
     var users = getUsers();
     if (users[username]) return { ok: false, message: "That username is taken." };
@@ -97,8 +209,53 @@
     if (!u) return { ok: false, message: "Session expired. Log in again." };
     u.targetAmount = Math.round(amount * 100) / 100;
     u.targetDate = dateStr;
-    u.savedAmount = u.savedAmount || 0;
+    u.savedAmount = 0;
     saveUserRecord(username, u);
+    var check = getUser(username);
+    if (check && Number(check.savedAmount) !== 0) {
+      check.savedAmount = 0;
+      saveUserRecord(username, check);
+    }
+    return { ok: true };
+  }
+
+  function markExpectSavedZeroAfterGoalSet(username) {
+    try {
+      var key = normalizeUsername(username);
+      if (!key) return;
+      var flagKey = EXPECT_ZERO_PREFIX + key;
+      localStorage.setItem(flagKey, "1");
+      mirrorPatchKeyValue(flagKey, "1");
+    } catch (e) {}
+  }
+
+  function applyExpectSavedZeroAfterGoalSet(username) {
+    var key = normalizeUsername(username);
+    if (!key) return;
+    var flagKey = EXPECT_ZERO_PREFIX + key;
+    var on = localStorage.getItem(flagKey);
+    if (on !== "1" && isFileProtocol()) {
+      var m = loadMirrorState();
+      if (m && m[flagKey] === "1") {
+        localStorage.setItem(flagKey, "1");
+      }
+    }
+    if (localStorage.getItem(flagKey) !== "1") return;
+    localStorage.removeItem(flagKey);
+    mirrorPatchKeyValue(flagKey, null);
+    var u = getUser(key);
+    if (!u) return;
+    u.savedAmount = 0;
+    saveUserRecord(key, u);
+  }
+
+  function resetSavedAmount(username) {
+    var key = normalizeUsername(username);
+    if (!key) return { ok: false, message: "No user." };
+    var u = getUser(key);
+    if (!u) return { ok: false, message: "User not found." };
+    u.savedAmount = 0;
+    saveUserRecord(key, u);
     return { ok: true };
   }
 
@@ -107,10 +264,32 @@
     if (!isFinite(add) || add <= 0) return { ok: false, message: "Enter a positive amount." };
     var u = getUser(username);
     if (!u || u.targetAmount == null) return { ok: false, message: "No goal set." };
-    u.savedAmount = Math.round(((u.savedAmount || 0) + add) * 100) / 100;
+    var cap = Number(u.targetAmount);
+    if (!isFinite(cap) || cap < 0) cap = 0;
+    var prev = Number(u.savedAmount);
+    if (!isFinite(prev) || prev < 0) prev = 0;
+    var next = Math.round((prev + add) * 100) / 100;
+    if (next > cap) next = cap;
+    u.savedAmount = next;
     saveUserRecord(username, u);
     var done = u.savedAmount >= u.targetAmount;
     return { ok: true, done: done };
+  }
+
+  /**
+   * Saved higher than the current goal happens after lowering the goal or old
+   * bugs that kept prior savings. Reset savings to 0 so the new goal starts clean.
+   */
+  function repairSavedIfExceedsTarget(username) {
+    var u = getUser(username);
+    if (!u || u.targetAmount == null) return;
+    var target = Number(u.targetAmount);
+    var saved = Number(u.savedAmount);
+    if (!isFinite(target) || target <= 0 || !isFinite(saved)) return;
+    if (saved > target) {
+      u.savedAmount = 0;
+      saveUserRecord(username, u);
+    }
   }
 
   function completeGoalAndClear(username) {
@@ -169,6 +348,10 @@
     saveGoal: saveGoal,
     addSavings: addSavings,
     completeGoalAndClear: completeGoalAndClear,
+    repairSavedIfExceedsTarget: repairSavedIfExceedsTarget,
+    markExpectSavedZeroAfterGoalSet: markExpectSavedZeroAfterGoalSet,
+    applyExpectSavedZeroAfterGoalSet: applyExpectSavedZeroAfterGoalSet,
+    resetSavedAmount: resetSavedAmount,
     getAdvicePosts: getAdvicePosts,
     addAdvicePost: addAdvicePost,
     formatMoney: formatMoney,

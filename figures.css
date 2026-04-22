@@ -5,7 +5,7 @@ body {
 
 .head {
     color: rgba(213, 240, 210, 1);
-    font-size: 60px;
+    font-size: 50px;
     font-family: "Carp Wide Bold", sans-serif;
     font-weight: 700;
     font-style: normal;
@@ -21,7 +21,7 @@ body {
 .when {
 
     color: rgba(213, 240, 210, 1);
-    font-size: 60px;
+    font-size: 50px;
     font-family: "Carp Wide Bold", sans-serif;
     font-weight: 700;
     font-style: normal;
@@ -39,7 +39,7 @@ body {
     font-family: "Carp Wide Bold", sans-serif;
     font-weight: 400;
     font-style: normal;
-    font-size: 50px;
+    font-size: 40px;
     color: rgba(88, 196, 76, 1);
     background-color: rgba(213, 240, 210, 1);
     width: 90vw;
@@ -64,11 +64,13 @@ body {
     padding-top: 2vh;
     padding-bottom: 2vh;
     border: none;
+    font-size: 40px;
 }
 
 ::placeholder {
     color: rgba(88, 196, 76, 1);
     opacity: 0.8;
+    font-size: 40px;
 }
 
 #figures-form {
@@ -88,14 +90,14 @@ body {
 
 .cont {
     z-index: 2;
-    color: rgba(213, 240, 210, 1);
-    background-color: rgba(88, 196, 76, 1);
+    background-color: rgba(213, 240, 210, 1);
+    color: rgba(88, 196, 76, 1);
     min-height: 4vh;
     width: 40vw;
-    font-size: 20px;
+    font-size: 30px;
     text-align: center;
     font-family: "Carp Wide Bold", sans-serif;
-    border-radius: 10px 10px 10px 10px;
+    border-radius: 30px 30px 30px 30px;
     margin-top: 3vh;
     border: none;
     cursor: pointer;

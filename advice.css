@@ -13,17 +13,7 @@ body {
 
 }
 
-.back {
-    background-color: rgba(213, 240, 210, 1);
-    width: 20vw;
-    height: 3vh;
-    border-radius: 40px 40px 40px 40px;
-    color: rgba(88, 196, 76, 1);
-    text-align: center;
-    padding-top: 1vh;
-    position: relative;
-    right: 33vw;
-}
+
 
 
 .test {
@@ -86,4 +76,17 @@ body {
 a {
     text-decoration: none;
     color: rgba(88, 196, 76, 1);
+    text-decoration: none;
+    background-color: rgba(213, 240, 210, 1);
+    padding: .5vh;
+    position: relative;
+    top: 1vh;
+    border-radius: 15px 15px 15px 15px;
+
+}
+
+.back {
+    position: relative;
+    right: 41vw;
+    bottom: 1vh;
 }

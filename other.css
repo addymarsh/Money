@@ -3,14 +3,16 @@ body {
 }
 
 .top {
-font-family: "Carp Wide Bold", sans-serif;
-color: rgba(255, 255, 255, 0.75);
-font-size: 20px;
-padding-left: 10vw;
-font-size: 40px;
-padding-top: 3vh;
-
-
+    font-family: "Carp Wide Bold", sans-serif;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 40px;
+    padding-top: 3vh;
+    padding-left: 4vw;
+    padding-right: 4vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .time {
@@ -21,9 +23,9 @@ padding-bottom: .5vh;
     background-color: rgba(255, 255, 255, 0.35);
     height: 2vh;
     width: 90vw;
+    max-width: 100%;
     position: relative;
     border-radius: 10px 10px 10px 10px;
-    right: 7vw;
     overflow: hidden;
 }
 
@@ -36,19 +38,33 @@ padding-bottom: .5vh;
 }
 
 .money {
-    left: 85vw;
     padding-top: .5vh;
     position: relative;
-    left: 50vw;
+    
 
+}
+
+.picture {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2vh 4vw;
+    min-height: 26vh;
+}
+
+.picture__art {
+    width: min(72vw, 300px);
+    height: auto;
+    display: block;
+    pointer-events: none;
 }
 
 .bottom {
     font-family: "Carp Wide Bold", sans-serif;
     color: rgba(255, 255, 255, 0.75);
     position: relative;
-    top: 60vh;
-    font-size: 40px;
+    top: 20vh;
+    font-size: 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -62,6 +78,7 @@ padding-bottom: .5vh;
     align-items: center;
     width: 100%;
     gap: 1vh;
+    font-size: 25px;
 }
 
 .savings-error {
@@ -84,13 +101,13 @@ padding-bottom: .5vh;
 
 .goal {
     padding-bottom: 1vh;
-    
+    text-align: center;
 }
 
 .add {
     font-weight: 400;
     font-style: normal;
-    font-size: 50px;
+    font-size: 40px;
     color: rgba(28, 97, 9, 1);
     background-color: rgba(255, 255, 255, 0.75);
     width: 90vw;
@@ -107,7 +124,7 @@ padding-bottom: .5vh;
 
 ::placeholder {
     color: rgba(88, 196, 76, 1);
-    font-size: 50px;
+    font-size: 40px;
     font-family: "Carp Wide Bold", sans-serif;
 
 }
@@ -153,3 +170,13 @@ padding-bottom: .5vh;
     }
 }
 
+
+a, a:link, a:visited, a:hover, a:active {
+    color: rgba(88, 196, 76, 1);
+    text-decoration: none;
+    background-color: rgba(213, 240, 210, 1);
+    padding: .5vh;
+    position: relative;
+    top: 1vh;
+    border-radius: 15px 15px 15px 15px;
+}
