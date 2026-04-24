@@ -1,4 +1,5 @@
 body {
+    margin: 0;
     background-color: rgba(88, 196, 76, 1);
     font-family: "Carp Wide Bold", sans-serif;
 }
@@ -21,7 +22,7 @@ a, a:link, a:visited, a:hover, a:active {
 
 .signup, .login {
     color:rgba(213, 240, 210, 1);
-    font-size: 50px;
+    font-size: calc(50px * var(--type-scale));
     position: relative;
     text-align: center;
     justify-content: center;
@@ -33,24 +34,28 @@ a, a:link, a:visited, a:hover, a:active {
 .login-d, .signup-d {
     background-color: rgba(255, 255, 255, 0.75);
     width: 90vw;
-    min-height: 24vh;
+    max-width: 100%;
     border-radius: 40px 40px 40px 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     position: relative;
-    padding: 2vh 0 1vh;
+    padding: 2.5vh 5vw 2.5vh;
     box-sizing: border-box;
+    row-gap: 0.5vh;
 }
 
 .user, .pass {
     color: rgba(88, 196, 76, 1);
-    font-size: 30px;
+    font-size: calc(30px * var(--type-scale));
     padding-top: 1vh;
-    align-items: left;
-    margin-right: 25vw;;
-
+    width: 70vw;
+    max-width: 100%;
+    margin: 0;
+    text-align: left;
+    align-self: center;
+    box-sizing: border-box;
 }
 
 
@@ -66,18 +71,20 @@ textarea,
   border: none;
   border-radius: 10px 10px 10px 10px;
   width: 70vw;
-  height: 3vh;
+  max-width: 100%;
+  min-height: clamp(2.25rem, 5.5dvh, 3rem);
+  height: auto;
   color: rgba(213, 240, 210, 1);
   font-family: inherit;
-  font-size: 16px;
-  padding: 0 8px;
+  font-size: calc(16px * var(--type-scale));
+  padding: 0.5rem 8px;
   box-sizing: border-box;
 }
 
 .form-error {
   color: rgba(139, 30, 30, 1);
-  font-size: 14px;
-  margin: 0;
+  font-size: calc(14px * var(--type-scale));
+  margin: 1vh 0 0;
   text-align: center;
   max-width: 80vw;
 }
@@ -86,19 +93,25 @@ textarea,
     z-index: 2;
     color: rgba(213, 240, 210, 1);
     background-color: rgba(88, 196, 76, 1);
-    height: 3vh;
-    width: 30vw;
-    font-size: 20px;
+    min-height: clamp(2.75rem, 6dvh, 3.75rem);
+    height: auto;
+    width: auto;
+    min-width: min(40vw, 12rem);
+    max-width: 70vw;
+    font-size: calc(20px * var(--type-scale));
     text-align: center;
-    justify-content: center;
-    align-items: center;
     border-radius: 10px 10px 10px 10px;
     position: relative;
     border: none;
     cursor: pointer;
     font-family: inherit;
-    
-
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1dvh 6vw;
+    margin-top: 1.5vh;
+    line-height: 1.2;
+    box-sizing: border-box;
 }
     
 .help {

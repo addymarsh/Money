@@ -17,11 +17,11 @@
 }
 
 .page-splash__logo {
-    width: min(55vw, 280px);
+    width: min(55vw, calc(280px * var(--type-scale) * var(--illustration-scale)));
     height: auto;
     display: block;
 }
 
 .page-splash--index .page-splash__logo {
-    width: min(88vw, 520px);
+    width: min(88vw, calc(520px * var(--type-scale) * var(--illustration-scale)));
 }

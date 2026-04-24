@@ -15,7 +15,11 @@ body {
 .congrats-title {
     color: rgba(213, 240, 210, 1);
     font-family: "Carp Wide Bold", sans-serif;
-    font-size: clamp(36px, 8vw, 56px);
+    font-size: clamp(
+        calc(36px * var(--type-scale)),
+        8vw,
+        calc(56px * var(--type-scale))
+    );
     margin: 0 0 2vh;
     text-align: center;
 }
@@ -23,7 +27,11 @@ body {
 .congrats-sub {
     color: rgba(255, 255, 255, 0.9);
     font-family: "Carp Wide Bold", sans-serif;
-    font-size: clamp(18px, 4vw, 24px);
+    font-size: clamp(
+        calc(18px * var(--type-scale)),
+        4vw,
+        calc(24px * var(--type-scale))
+    );
     text-align: center;
     max-width: 36em;
     margin: 0 0 3vh;
@@ -41,7 +49,7 @@ body {
 
 .congrats-input {
     font-family: "Carp Wide Bold", sans-serif;
-    font-size: 22px;
+    font-size: calc(22px * var(--type-scale));
     color: rgba(28, 97, 9, 1);
     background-color: rgba(213, 240, 210, 1);
     border: none;
@@ -55,7 +63,7 @@ body {
 
 .congrats-submit {
     font-family: "Carp Wide Bold", sans-serif;
-    font-size: 24px;
+    font-size: calc(24px * var(--type-scale));
     color: rgba(213, 240, 210, 1);
     background-color: rgba(28, 97, 9, 0.9);
     border: none;
@@ -67,7 +75,7 @@ body {
 
 .congrats-error {
     color: rgba(139, 30, 30, 1);
-    font-size: 18px;
+    font-size: calc(18px * var(--type-scale));
     margin: 0;
     text-align: center;
 }

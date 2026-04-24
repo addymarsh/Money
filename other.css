@@ -1,18 +1,42 @@
+html {
+    height: 100%;
+}
+
+html,
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    margin: 0;
+}
+
 body {
     background-color: rgba(88, 196, 76, 1);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: 100dvh;
+    max-height: 100dvh;
+    overflow: hidden;
+}
+
+.help {
+    flex-shrink: 0;
+    align-self: flex-start;
+    padding-left: 4vw;
 }
 
 .top {
     font-family: "Carp Wide Bold", sans-serif;
     color: rgba(255, 255, 255, 0.75);
-    font-size: 40px;
-    padding-top: 3vh;
+    font-size: calc(40px * var(--type-scale));
+    padding-top: min(2dvh, 1rem);
     padding-left: 4vw;
     padding-right: 4vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    flex-shrink: 0;
 }
 
 .time {
@@ -21,7 +45,7 @@ padding-bottom: .5vh;
 
 .bar {
     background-color: rgba(255, 255, 255, 0.35);
-    height: 2vh;
+    height: min(2dvh, 12px);
     width: 90vw;
     max-width: 100%;
     position: relative;
@@ -45,16 +69,21 @@ padding-bottom: .5vh;
 }
 
 .picture {
+    flex: 1 1 0;
+    min-height: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2vh 4vw;
-    min-height: 26vh;
+    padding: 1dvh 4vw;
 }
 
 .picture__art {
-    width: min(72vw, 300px);
+    /* Preferred width from design scale; never taller than the flex area so the page fits one screen */
+    max-width: min(82vw, calc(300px * var(--type-scale) * var(--illustration-scale)));
+    max-height: 100%;
+    width: auto;
     height: auto;
+    object-fit: contain;
     display: block;
     pointer-events: none;
 }
@@ -62,14 +91,13 @@ padding-bottom: .5vh;
 .bottom {
     font-family: "Carp Wide Bold", sans-serif;
     color: rgba(255, 255, 255, 0.75);
-    position: relative;
-    top: 20vh;
-    font-size: 25px;
+    font-size: calc(25px * var(--type-scale));
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
+    flex-shrink: 0;
+    padding-bottom: max(1.25dvh, env(safe-area-inset-bottom, 0px));
 }
 
 #savings-form {
@@ -77,54 +105,61 @@ padding-bottom: .5vh;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    gap: 1vh;
-    font-size: 25px;
+    gap: min(0.75dvh, 0.4rem);
+    font-size: calc(25px * var(--type-scale));
 }
 
 .savings-error {
     color: rgba(139, 30, 30, 1);
-    font-size: 20px;
+    font-size: calc(20px * var(--type-scale));
     margin: 0;
     text-align: center;
 }
 
 .add-btn {
     font-family: "Carp Wide Bold", sans-serif;
-    font-size: 24px;
+    font-size: calc(24px * var(--type-scale));
     color: rgba(213, 240, 210, 1);
     background-color: rgba(28, 97, 9, 0.85);
     border: none;
     border-radius: 40px;
-    padding: 1.5vh 6vw;
+    padding: 1vh 6vw;
+    box-sizing: border-box;
     cursor: pointer;
+    flex-shrink: 0;
+    overflow: visible;
+    white-space: nowrap;
 }
 
 .goal {
-    padding-bottom: 1vh;
+    padding-bottom: min(0.75dvh, 0.4rem);
     text-align: center;
 }
 
 .add {
+    --add-h: clamp(3.5rem, 10.5dvh, 4.5rem);
     font-weight: 400;
     font-style: normal;
-    font-size: 40px;
+    font-size: calc(40px * var(--type-scale));
     color: rgba(28, 97, 9, 1);
     background-color: rgba(255, 255, 255, 0.75);
     width: 90vw;
-    height: 10vh;
-    line-height: 10vh;
+    height: var(--add-h);
+    min-height: var(--add-h);
+    /* Inner line box matches content area: equal 1vh top + bottom in border-box */
+    line-height: calc(var(--add-h) - 2vh);
+    box-sizing: border-box;
     text-align: center;
-    text-justify: center;
-    justify-content: center;
-    align-items: center;
-    justify-self: center;
     position: relative;
     border-radius: 40px 40px 40px 40px;
+    padding: 1vh 0;
+    overflow: hidden;
+    resize: none;
 }
 
 ::placeholder {
     color: rgba(88, 196, 76, 1);
-    font-size: 40px;
+    font-size: calc(40px * var(--type-scale));
     font-family: "Carp Wide Bold", sans-serif;
 
 }
